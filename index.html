@@ -1,11 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Foundations - Etch a Sketch</title>
 </head>
+
 <body>
-    
+    <div class="container">
+        <!-- Square divs will be dynamically generated here -->
+    </div>
+    <button id="gridButton">Create New Grid</button>
+
+    <script>
+        const container = document.querySelector('.container');
+        const button = document.querySelector('#gridButton');
+
+        button.addEventListener('click', () => {
+            const squaresPerSide = prompt('Enter the number of squares per side (maximum 100):');
+
+            if (squaresPerSide) {
+                const gridSize = parseInt(squaresPerSide, 10);
+
+                if (!isNaN(gridSize) && gridSize > 0 && gridSize <= 100) {
+                    removeGrid();
+                    generateGrid(gridSize);
+                } else {
+                    alert('Invalid input! Please enter a number between 1 and 100.');
+                }
+            }
+        });
+
+        function removeGrid() {
+            container.innerHTML = '';
+        }
+
+        function generateGrid(size) {
+            container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    container.appendChild(square);
+
+                    square.addEventListener('mouseover', () => {
+                        square.style.backgroundColor = getRandomColor();
+                    });
+
+                    square.addEventListener('mouseout', () => {
+                        square.style.backgroundColor = 'lightgray';
+                    });
+                }
+            }
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
 </body>
+
+</html>
+
 </html>

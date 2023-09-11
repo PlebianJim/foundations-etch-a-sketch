@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+}
+
+.square {
+    background-color: lightgray;
+    border: 1px solid gray;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    caret-color: transparent;
+  }
+
+button {
+    width: 125px;
+}
